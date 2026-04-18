@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ASEFORTMEC | Solución premium</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090c;
+  --panel:rgba(10,14,20,.76);
+  --panel-2:rgba(18,24,32,.82);
+  --gold:#d5a63a;
+  --gold-2:#f1c15a;
+  --text:#f4f7fb;
+  --muted:#c2c9d3;
+  --line:rgba(255,255,255,.12);
+  --ok:#25c06d;
+  --warn:#f0b43c;
+  --bad:#e15353;
+  --shadow:0 18px 50px rgba(0,0,0,.35);
+  --radius:22px;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--text);
+  background:
+    linear-gradient(rgba(4,7,11,.84), rgba(4,7,11,.93)),
+    url('assets/hero_mina.jpg') center/cover fixed no-repeat;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(var(--max), calc(100% - 32px)); margin:0 auto}
+.topbar{
+  position:sticky; top:0; z-index:30;
+  backdrop-filter: blur(12px);
+  background:rgba(5,8,12,.72);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px; padding:14px 0;
+}
+.brand{display:flex; align-items:center; gap:14px}
+.brand img{height:42px; width:auto}
+.brand strong{font-size:1.05rem; letter-spacing:.4px}
+.navlinks{display:flex; gap:18px; flex-wrap:wrap; font-size:.96rem; color:var(--muted)}
+.navlinks a{padding:10px 0}
+.btn, button{
+  border:none; border-radius:999px; padding:13px 20px;
+  font-weight:700; cursor:pointer; transition:.2s ease;
+}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:#121212; box-shadow:var(--shadow)}
+.btn-secondary{background:transparent; color:var(--text); border:1px solid var(--line)}
+.btn:hover, button:hover{transform:translateY(-1px)}
+.hero{padding:72px 0 46px}
+.hero-grid{
+  display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:stretch;
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.hero-copy{padding:42px}
+.eyebrow{display:inline-flex; gap:10px; align-items:center; color:var(--gold-2); font-weight:800; letter-spacing:.08em; text-transform:uppercase; font-size:.82rem}
+.hero h1{font-size:clamp(2.2rem,5vw,4.5rem); line-height:1.03; margin:16px 0 14px}
+.hero p{font-size:1.06rem; line-height:1.72; color:var(--muted); max-width:62ch}
+.actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:28px}
+.hero-side{overflow:hidden; position:relative; min-height:460px}
+.hero-side::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(7,10,14,.88), rgba(7,10,14,.28))}
+.hero-side .overlay{
+  position:absolute; inset:auto 24px 24px 24px; z-index:1;
+  background:rgba(10,12,18,.6); border:1px solid rgba(255,255,255,.14);
+  border-radius:18px; padding:18px;
+}
+.hero-side h3{margin:0 0 8px; font-size:1.15rem}
+.hero-side p{margin:0; color:var(--muted); line-height:1.6}
+.section{padding:18px 0 22px}
+.section-box{padding:30px}
+.section-title{font-size:1.8rem; margin:0 0 8px}
+.section-sub{color:var(--muted); line-height:1.7; max-width:72ch; margin:0 0 22px}
+.grid-3,.grid-4,.grid-2{display:grid; gap:18px}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.metric{padding:22px; background:var(--panel-2); border-radius:20px; border:1px solid var(--line)}
+.metric h3,.mini h3{margin:0 0 8px; font-size:1.05rem}
+.metric p,.mini p,.list p{margin:0; color:var(--muted); line-height:1.65}
+.kpi{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:12px;
+}
+.kpi .item{
+  background:rgba(255,255,255,.04); border:1px solid var(--line); border-radius:18px; padding:18px;
+}
+.kpi strong{display:block; font-size:2rem; margin-bottom:6px}
+.chips{display:flex; flex-wrap:wrap; gap:10px}
+.chip{
+  padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.06);
+  border:1px solid var(--line); color:#e9edf4; font-size:.95rem
+}
+.timeline{display:grid; grid-template-columns:repeat(4,1fr); gap:18px}
+.step{padding:20px; background:var(--panel-2); border-radius:20px; border:1px solid var(--line)}
+.step .n{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:#121212; font-weight:800; margin-bottom:12px}
+.step p{color:var(--muted); line-height:1.6}
+.cta-band{
+  padding:26px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+  background:linear-gradient(135deg, rgba(213,166,58,.14), rgba(255,255,255,.06));
+  border:1px solid rgba(213,166,58,.28); border-radius:24px;
+}
+.footer{padding:28px 0 50px; color:var(--muted); font-size:.95rem}
+.small{font-size:.93rem; color:var(--muted)}
+.table{width:100%; border-collapse:collapse}
+.table th,.table td{padding:14px 12px; border-bottom:1px solid var(--line); text-align:left}
+.table th{color:#f6d98a; font-size:.95rem}
+.badge{display:inline-block; padding:8px 12px; border-radius:999px; font-weight:700; font-size:.86rem}
+.badge-ok{background:rgba(37,192,109,.16); color:#7ae0a8}
+.badge-warn{background:rgba(240,180,60,.16); color:#ffd170}
+.badge-bad{background:rgba(225,83,83,.16); color:#ff9b9b}
+.form-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+input, select, textarea{
+  width:100%; border-radius:16px; background:rgba(255,255,255,.05); color:var(--text);
+  border:1px solid var(--line); padding:14px 15px; font:inherit
+}
+textarea{min-height:130px; resize:vertical}
+label{display:block; font-size:.92rem; margin-bottom:8px; color:#e9edf4}
+.notice{padding:14px 16px; border-radius:16px; background:rgba(255,255,255,.05); border:1px dashed var(--line); color:var(--muted)}
+.center{text-align:center}
+@media (max-width: 980px){
+  .hero-grid,.grid-4,.grid-3,.grid-2,.timeline,.kpi,.form-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 720px){
+  .nav{align-items:flex-start; flex-direction:column}
+  .hero-grid,.grid-4,.grid-3,.grid-2,.timeline,.kpi,.form-grid{grid-template-columns:1fr}
+  .hero-copy{padding:28px}
+  .hero-side{min-height:320px}
+}
+@media print{
+  .topbar,.print-hide{display:none!important}
+  body{background:#0c1016}
+  .card,.metric,.step,.cta-band{box-shadow:none}
+}
+</style>
+
+</head>
+<body>
+<div class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo_asefortmec.png" alt="ASEFORTMEC">
+      <div>
+        <strong>ASEFORTMEC SPA</strong>
+        <div class="small">Ingeniería, formación y control operacional</div>
+      </div>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">Inicio</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="certificados.html">Validación</a>
+      <a href="portal.html">Portal interno</a>
+    </nav>
+  </div>
+</div>
+
+<main class="hero">
+  <div class="container hero-grid">
+    <section class="card hero-copy">
+      <span class="eyebrow">Solución premium para minería subterránea</span>
+      <h1>Continuidad operacional, trazabilidad y certificación en un solo ecosistema.</h1>
+      <p>
+        ASEFORTMEC integra evaluación de competencias, entrenamiento en terreno, control de brechas,
+        reportería ejecutiva y validación documental para operaciones mineras que necesitan resultados
+        medibles, respaldo técnico y una presentación corporativa sólida frente a mandantes.
+      </p>
+      <div class="actions">
+        <a class="btn btn-primary" href="#contacto">Solicitar reunión</a>
+        <a class="btn btn-secondary" href="dashboard.html">Ver dashboard ejecutivo</a>
+      </div>
+      <div class="kpi">
+        <div class="item"><strong>4</strong><span>Etapas metodológicas integradas</span></div>
+        <div class="item"><strong>100%</strong><span>Trazabilidad documental del proceso</span></div>
+        <div class="item"><strong>24/7</strong><span>Consulta de certificados y resultados</span></div>
+        <div class="item"><strong>1</strong><span>Plataforma central para operación y cliente</span></div>
+      </div>
+    </section>
+    <aside class="card hero-side" style="background:url('assets/hero_mina.jpg') center/cover no-repeat;">
+      <div class="overlay">
+        <h3>Modelo de servicio orientado a mandantes</h3>
+        <p>
+          Enfoque gerencial, soporte operacional y evidencia digital para capacitación, evaluación,
+          certificación y seguimiento de desempeño por equipo, contrato y periodo.
+        </p>
+      </div>
+    </aside>
+  </div>
+</main>
+
+<section class="section">
+  <div class="container card section-box">
+    <h2 class="section-title">Propuesta de valor</h2>
+    <p class="section-sub">
+      Diseñamos soluciones aplicadas a minería subterránea con foco en seguridad, productividad,
+      desempeño de operadores y control de información. La plataforma premium combina presencia comercial,
+      acceso cliente, validación pública de certificados y gestión interna en una sola experiencia.
+    </p>
+    <div class="grid-3">
+      <article class="metric">
+        <h3>Desarrollo de competencias</h3>
+        <p>Programas teóricos y prácticos en terreno para operadores de jumbo, simba, boltec, scoop y equipos asociados al ciclo mina.</p>
+      </article>
+      <article class="metric">
+        <h3>Control de brechas</h3>
+        <p>Evaluación inicial, seguimiento de avances y consolidación de resultados por persona, equipo, turno o contrato.</p>
+      </article>
+      <article class="metric">
+        <h3>Respaldo documental</h3>
+        <p>Certificación con código de validación, historial estructurado y visualización ejecutiva para clientes y áreas de supervisión.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container card section-box">
+    <h2 class="section-title">Impacto esperado en la operación</h2>
+    <div class="grid-4">
+      <article class="metric"><h3>Reducción de desviaciones</h3><p>Disminución de errores operacionales y fortalecimiento del cumplimiento de estándares.</p></article>
+      <article class="metric"><h3>Mejor desempeño</h3><p>Mayor consistencia en la ejecución de tareas críticas, con seguimiento por familia de equipos.</p></article>
+      <article class="metric"><h3>Mayor visibilidad</h3><p>Acceso inmediato a indicadores, evidencias y estado documental desde un panel unificado.</p></article>
+      <article class="metric"><h3>Confianza frente al mandante</h3><p>Presentación corporativa robusta, trazabilidad y validación pública de certificados emitidos.</p></article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container card section-box">
+    <h2 class="section-title">Metodología operacional</h2>
+    <p class="section-sub">Estructura aplicada para ejecutar programas de cierre de brechas y certificación con respaldo técnico.</p>
+    <div class="timeline">
+      <article class="step">
+        <div class="n">1</div>
+        <h3>Evaluación de entrada</h3>
+        <p>Levantamiento de nivel inicial, detección de brechas y segmentación de participantes según competencias observadas.</p>
+      </article>
+      <article class="step">
+        <div class="n">2</div>
+        <h3>Capacitación teórica y práctica</h3>
+        <p>Transferencia técnica orientada a productividad, controles críticos y buenas prácticas de operación en terreno.</p>
+      </article>
+      <article class="step">
+        <div class="n">3</div>
+        <h3>Evaluación final</h3>
+        <p>Verificación de competencias y consolidación de resultados por participante, equipo y familia operacional.</p>
+      </article>
+      <article class="step">
+        <div class="n">4</div>
+        <h3>Certificación y trazabilidad</h3>
+        <p>Emisión documental con código único, consulta en línea y registro histórico para clientes y auditorías internas.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <div class="container grid-2">
+    <div class="card section-box">
+      <h2 class="section-title">Especialidad por equipos</h2>
+      <p class="section-sub">Cobertura alineada con equipos y operaciones frecuentemente trabajadas por ASEFORTMEC.</p>
+      <div class="chips">
+        <span class="chip">Boomer S1D / S2C</span>
+        <span class="chip">Simba S7D</span>
+        <span class="chip">Boltec M</span>
+        <span class="chip">Scooptram ST1030</span>
+        <span class="chip">JCB 533-105</span>
+        <span class="chip">Roboshot Alpha</span>
+        <span class="chip">Mixer Tornado</span>
+        <span class="chip">Fortificación mecanizada</span>
+      </div>
+    </div>
+    <div class="card section-box">
+      <h2 class="section-title">Entregables premium</h2>
+      <div class="grid-2">
+        <article class="mini metric"><h3>Panel ejecutivo</h3><p>Visualización de KPI por contrato, equipo y periodo.</p></article>
+        <article class="mini metric"><h3>Validación pública</h3><p>Consulta de certificados mediante código único.</p></article>
+        <article class="mini metric"><h3>Portal interno</h3><p>Registro de evaluaciones, operadores y certificaciones.</p></article>
+        <article class="mini metric"><h3>Base estructurada</h3><p>Hoja central para respaldar trazabilidad y reportería.</p></article>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section" id="contacto">
+  <div class="container card section-box">
+    <div class="cta-band">
+      <div>
+        <h2 class="section-title" style="margin:0 0 8px">Solicita una propuesta técnico-comercial</h2>
+        <p class="section-sub" style="margin:0">Presentación institucional, levantamiento de necesidad y propuesta adaptada a faena, dotación y equipos objetivo.</p>
+      </div>
+      <div class="actions print-hide">
+        <a class="btn btn-primary" href="mailto:bernardo.ojedam@gmail.com">Contactar ahora</a>
+        <button class="btn btn-secondary" onclick="window.print()">Guardar en PDF</button>
+      </div>
+    </div>
+    <div style="height:18px"></div>
+    <form action="https://formsubmit.co/bernardo.ojedam@gmail.com" method="POST">
+      <input type="hidden" name="_cc" value="minerotamayo1@gmail.com">
+      <input type="hidden" name="_captcha" value="false">
+      <input type="hidden" name="_subject" value="Nueva consulta desde sitio ASEFORTMEC">
+      <div class="form-grid">
+        <div><label>Nombre</label><input name="nombre" required placeholder="Nombre y apellido"></div>
+        <div><label>Correo electrónico</label><input type="email" name="email" required placeholder="correo@empresa.cl"></div>
+        <div><label>Empresa / mandante</label><input name="empresa" placeholder="Empresa"></div>
+        <div><label>Teléfono</label><input name="telefono" placeholder="+56"></div>
+      </div>
+      <div style="height:14px"></div>
+      <div><label>Requerimiento</label><textarea name="mensaje" placeholder="Cuéntanos el alcance del servicio requerido, cantidad de participantes, equipos y objetivo operacional."></textarea></div>
+      <div style="height:16px"></div>
+      <button class="btn btn-primary" type="submit">Enviar consulta</button>
+    </form>
+  </div>
+</section>
+
+<footer class="footer">
+  <div class="container">
+    <div>ASEFORTMEC SPA · Rancagua · Chile</div>
+    <div class="small">Ingeniería aplicada, formación técnica y control operacional para minería subterránea.</div>
+  </div>
+</footer>
+
+</body>
+</html>
