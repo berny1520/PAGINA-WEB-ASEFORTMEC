@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ASEFORTMEC | Validación de certificados</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#07090c;
+  --panel:rgba(10,14,20,.76);
+  --panel-2:rgba(18,24,32,.82);
+  --gold:#d5a63a;
+  --gold-2:#f1c15a;
+  --text:#f4f7fb;
+  --muted:#c2c9d3;
+  --line:rgba(255,255,255,.12);
+  --ok:#25c06d;
+  --warn:#f0b43c;
+  --bad:#e15353;
+  --shadow:0 18px 50px rgba(0,0,0,.35);
+  --radius:22px;
+  --max:1180px;
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  font-family:Inter,Segoe UI,Arial,sans-serif;
+  color:var(--text);
+  background:
+    linear-gradient(rgba(4,7,11,.84), rgba(4,7,11,.93)),
+    url('assets/hero_mina.jpg') center/cover fixed no-repeat;
+}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+.container{width:min(var(--max), calc(100% - 32px)); margin:0 auto}
+.topbar{
+  position:sticky; top:0; z-index:30;
+  backdrop-filter: blur(12px);
+  background:rgba(5,8,12,.72);
+  border-bottom:1px solid var(--line);
+}
+.nav{
+  display:flex; align-items:center; justify-content:space-between;
+  gap:24px; padding:14px 0;
+}
+.brand{display:flex; align-items:center; gap:14px}
+.brand img{height:42px; width:auto}
+.brand strong{font-size:1.05rem; letter-spacing:.4px}
+.navlinks{display:flex; gap:18px; flex-wrap:wrap; font-size:.96rem; color:var(--muted)}
+.navlinks a{padding:10px 0}
+.btn, button{
+  border:none; border-radius:999px; padding:13px 20px;
+  font-weight:700; cursor:pointer; transition:.2s ease;
+}
+.btn-primary{background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:#121212; box-shadow:var(--shadow)}
+.btn-secondary{background:transparent; color:var(--text); border:1px solid var(--line)}
+.btn:hover, button:hover{transform:translateY(-1px)}
+.hero{padding:72px 0 46px}
+.hero-grid{
+  display:grid; grid-template-columns:1.2fr .8fr; gap:24px; align-items:stretch;
+}
+.card{
+  background:var(--panel);
+  border:1px solid var(--line);
+  border-radius:var(--radius);
+  box-shadow:var(--shadow);
+}
+.hero-copy{padding:42px}
+.eyebrow{display:inline-flex; gap:10px; align-items:center; color:var(--gold-2); font-weight:800; letter-spacing:.08em; text-transform:uppercase; font-size:.82rem}
+.hero h1{font-size:clamp(2.2rem,5vw,4.5rem); line-height:1.03; margin:16px 0 14px}
+.hero p{font-size:1.06rem; line-height:1.72; color:var(--muted); max-width:62ch}
+.actions{display:flex; gap:14px; flex-wrap:wrap; margin-top:28px}
+.hero-side{overflow:hidden; position:relative; min-height:460px}
+.hero-side::after{content:""; position:absolute; inset:0; background:linear-gradient(to top, rgba(7,10,14,.88), rgba(7,10,14,.28))}
+.hero-side .overlay{
+  position:absolute; inset:auto 24px 24px 24px; z-index:1;
+  background:rgba(10,12,18,.6); border:1px solid rgba(255,255,255,.14);
+  border-radius:18px; padding:18px;
+}
+.hero-side h3{margin:0 0 8px; font-size:1.15rem}
+.hero-side p{margin:0; color:var(--muted); line-height:1.6}
+.section{padding:18px 0 22px}
+.section-box{padding:30px}
+.section-title{font-size:1.8rem; margin:0 0 8px}
+.section-sub{color:var(--muted); line-height:1.7; max-width:72ch; margin:0 0 22px}
+.grid-3,.grid-4,.grid-2{display:grid; gap:18px}
+.grid-4{grid-template-columns:repeat(4,1fr)}
+.grid-3{grid-template-columns:repeat(3,1fr)}
+.grid-2{grid-template-columns:repeat(2,1fr)}
+.metric{padding:22px; background:var(--panel-2); border-radius:20px; border:1px solid var(--line)}
+.metric h3,.mini h3{margin:0 0 8px; font-size:1.05rem}
+.metric p,.mini p,.list p{margin:0; color:var(--muted); line-height:1.65}
+.kpi{
+  display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-top:12px;
+}
+.kpi .item{
+  background:rgba(255,255,255,.04); border:1px solid var(--line); border-radius:18px; padding:18px;
+}
+.kpi strong{display:block; font-size:2rem; margin-bottom:6px}
+.chips{display:flex; flex-wrap:wrap; gap:10px}
+.chip{
+  padding:10px 14px; border-radius:999px; background:rgba(255,255,255,.06);
+  border:1px solid var(--line); color:#e9edf4; font-size:.95rem
+}
+.timeline{display:grid; grid-template-columns:repeat(4,1fr); gap:18px}
+.step{padding:20px; background:var(--panel-2); border-radius:20px; border:1px solid var(--line)}
+.step .n{width:36px;height:36px;border-radius:50%;display:grid;place-items:center;background:linear-gradient(135deg,var(--gold),var(--gold-2)); color:#121212; font-weight:800; margin-bottom:12px}
+.step p{color:var(--muted); line-height:1.6}
+.cta-band{
+  padding:26px; display:flex; justify-content:space-between; align-items:center; gap:16px; flex-wrap:wrap;
+  background:linear-gradient(135deg, rgba(213,166,58,.14), rgba(255,255,255,.06));
+  border:1px solid rgba(213,166,58,.28); border-radius:24px;
+}
+.footer{padding:28px 0 50px; color:var(--muted); font-size:.95rem}
+.small{font-size:.93rem; color:var(--muted)}
+.table{width:100%; border-collapse:collapse}
+.table th,.table td{padding:14px 12px; border-bottom:1px solid var(--line); text-align:left}
+.table th{color:#f6d98a; font-size:.95rem}
+.badge{display:inline-block; padding:8px 12px; border-radius:999px; font-weight:700; font-size:.86rem}
+.badge-ok{background:rgba(37,192,109,.16); color:#7ae0a8}
+.badge-warn{background:rgba(240,180,60,.16); color:#ffd170}
+.badge-bad{background:rgba(225,83,83,.16); color:#ff9b9b}
+.form-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:14px}
+input, select, textarea{
+  width:100%; border-radius:16px; background:rgba(255,255,255,.05); color:var(--text);
+  border:1px solid var(--line); padding:14px 15px; font:inherit
+}
+textarea{min-height:130px; resize:vertical}
+label{display:block; font-size:.92rem; margin-bottom:8px; color:#e9edf4}
+.notice{padding:14px 16px; border-radius:16px; background:rgba(255,255,255,.05); border:1px dashed var(--line); color:var(--muted)}
+.center{text-align:center}
+@media (max-width: 980px){
+  .hero-grid,.grid-4,.grid-3,.grid-2,.timeline,.kpi,.form-grid{grid-template-columns:1fr 1fr}
+}
+@media (max-width: 720px){
+  .nav{align-items:flex-start; flex-direction:column}
+  .hero-grid,.grid-4,.grid-3,.grid-2,.timeline,.kpi,.form-grid{grid-template-columns:1fr}
+  .hero-copy{padding:28px}
+  .hero-side{min-height:320px}
+}
+@media print{
+  .topbar,.print-hide{display:none!important}
+  body{background:#0c1016}
+  .card,.metric,.step,.cta-band{box-shadow:none}
+}
+</style>
+
+<script>
+const base = [
+  {codigo:"ASF-2026-0001", nombre:"Marco Antonio Silva Albrecht", rut:"10.177.598-4", equipo:"Boomer S1D", resultado:"Aprobado", fecha:"2026-04-03"},
+  {codigo:"ASF-2026-0002", nombre:"Elias Enrique Marchant Chacón", rut:"10.752.814-8", equipo:"Simba S7D", resultado:"Aprobado", fecha:"2026-04-04"},
+  {codigo:"ASF-2026-0003", nombre:"Cristian Pascual Carquín Maldonado", rut:"11.888.109-5", equipo:"Scooptram ST1030", resultado:"Aprobado", fecha:"2026-04-06"}
+];
+function buscar(codigo){
+  const item = base.find(x => x.codigo.toLowerCase() === codigo.toLowerCase().trim());
+  const out = document.getElementById('resultado');
+  if(!item){
+    out.innerHTML = `<div class="metric"><h3>No se encontró el código consultado</h3><p>Verifica el identificador ingresado o conecta esta vista a tu base oficial mediante Apps Script para validación en línea.</p></div>`;
+    return;
+  }
+  out.innerHTML = `
+    <div class="metric">
+      <h3>Certificado válido</h3>
+      <p><strong>Código:</strong> ${item.codigo}</p>
+      <p><strong>Participante:</strong> ${item.nombre}</p>
+      <p><strong>RUT:</strong> ${item.rut}</p>
+      <p><strong>Equipo:</strong> ${item.equipo}</p>
+      <p><strong>Resultado:</strong> ${item.resultado}</p>
+      <p><strong>Fecha:</strong> ${item.fecha}</p>
+    </div>`;
+}
+window.addEventListener('DOMContentLoaded', () => {
+  const params = new URLSearchParams(location.search);
+  const codigo = params.get('codigo');
+  if(codigo){ document.getElementById('codigo').value = codigo; buscar(codigo); }
+});
+</script>
+
+</head>
+<body>
+<div class="topbar">
+  <div class="container nav">
+    <a class="brand" href="index.html">
+      <img src="assets/logo_asefortmec.png" alt="ASEFORTMEC">
+      <div>
+        <strong>ASEFORTMEC SPA</strong>
+        <div class="small">Ingeniería, formación y control operacional</div>
+      </div>
+    </a>
+    <nav class="navlinks">
+      <a href="index.html">Inicio</a>
+      <a href="dashboard.html">Dashboard</a>
+      <a href="certificados.html">Validación</a>
+      <a href="portal.html">Portal interno</a>
+    </nav>
+  </div>
+</div>
+
+<main class="section" style="padding-top:34px">
+  <div class="container grid-2">
+    <section class="card section-box">
+      <h1 class="section-title">Validación pública de certificados</h1>
+      <p class="section-sub">
+        Ingrese el código de validación para consultar la vigencia del documento emitido por ASEFORTMEC.
+      </p>
+      <label>Código de certificado</label>
+      <div class="actions">
+        <input id="codigo" placeholder="Ejemplo: ASF-2026-0001" style="max-width:420px">
+        <button class="btn btn-primary" onclick="buscar(document.getElementById('codigo').value)">Validar</button>
+      </div>
+      <div style="height:12px"></div>
+      <div class="notice">Esta vista funciona con datos de referencia y queda preparada para conectarse a tu base oficial mediante Google Apps Script.</div>
+    </section>
+    <section class="card section-box">
+      <h2 class="section-title">Consulta</h2>
+      <div id="resultado" class="notice">Aquí aparecerá el resultado de la validación.</div>
+    </section>
+  </div>
+</main>
+<footer class="footer"><div class="container">ASEFORTMEC SPA · Sistema de validación pública.</div></footer>
+
+</body>
+</html>
